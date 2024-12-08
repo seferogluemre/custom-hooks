@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
 function useLocalStorage(lsKey: string) {
-    const [state, setState] = useState(localStorage.getItem(lsKey) ?? "");
+    const [state, setState] = useState(() => {
+        return localStorage.getItem(lsKey) ?? ""
+    });
 
     useEffect(() => {
         localStorage.setItem(lsKey, state);
