@@ -2,6 +2,8 @@ import './App.css'
 import useLocalStorage from './hooks/useLocalStorage';
 import PostParams from './components/interface/PostParams';
 import useFetch from './hooks/useFetch';
+import { useState } from 'react';
+import useLocal from './hooks/useLocal';
 
 
 function App() {
@@ -12,7 +14,6 @@ function App() {
   // const [firstName, setFirstName] = useLocalStorage("firstname");
 
   const { data: posts, loading, error } = useFetch<PostParams[]>("https://jsonplaceholder.typicode.com/posts");
-
 
   if (loading) {
     return (
@@ -27,10 +28,19 @@ function App() {
     )
   }
 
+  const [theme, setTheme] = useLocal("theme", "light");
+
+
+
+
 
   return (
     <>
       <div>
+        <p>theme : {theme}</p>
+        <button onClick={() => setTheme("light")}>Light Theme</button>
+        <button onClick={() => setTheme("dark")}>Dark Theme</button>
+
         <div>
           {
             posts?.map((post: PostParams) => (

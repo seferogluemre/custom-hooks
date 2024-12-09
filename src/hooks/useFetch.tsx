@@ -6,7 +6,6 @@ const useFetch = <T,>(url: string) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -27,10 +26,7 @@ const useFetch = <T,>(url: string) => {
     return { data, loading, error };
 
 
-
-
     return <>
-
 
         Emre
     </>
