@@ -8,12 +8,17 @@ function App() {
 
   async function fetchTodos() {
     setLoading(true);
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos/2"
-    );
-    const data = await response.json();
-    setTodo(data);
-    setLoading(false);
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos/2"
+      );
+      const data = await response.json();
+      setTodo(data);
+      setLoading(false);
+    } catch (e) {
+      setError((e as Error).message);
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -22,7 +27,13 @@ function App() {
 
   return (
     <>
-      <div>{JSON.stringify(todo)}</div>
+      {error ? (
+        error
+      ) : loading ? (
+        <div>Yükleniyor....</div>
+      ) : (
+        <div>{JSON.stringify(todo)}</div>
+      )}
     </>
   );
 }
